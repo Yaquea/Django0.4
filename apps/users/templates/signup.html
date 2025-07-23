@@ -4,11 +4,25 @@
 {% block content %}
 <div>
     <!-- Display an error message -->
-    {{ error }}
+{% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="error">{{ error }}</div>
+    {% endfor %}
+
+
 </div>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save</button>
 </form>
+
+
 {% endblock %}

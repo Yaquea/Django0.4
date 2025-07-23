@@ -24,7 +24,6 @@ from .models import User
 from .security.services import send_verification_email, resend_verification_email_cooldown
 
 
-
 def main(request):
     """
     Render the main landing page.
@@ -125,7 +124,8 @@ def signup(request):
         if form.is_valid():
             user = form.save(commit=False)  # Do not immediately save the user to the database.
             user.password = make_password(form.cleaned_data['password1'])  # Hash the password.
-            user.is_active = False  # Deactivate the account until email verification.
+            user.is_verified = False  # Set the user as unverified.
+            user.is_active = False # Set the user as inactive until email verification.
             user.save()  # Save the new user to the database.
 
             # Send a verification email to the new user.

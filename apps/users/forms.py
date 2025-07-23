@@ -38,17 +38,6 @@ class Signup_Form(forms.ModelForm):
 
         return image_file
 
-    def clean_password2(self):
-        # Retrieve both password fields
-        password1 = self.cleaned_data.get("password1")
-        password2 = self.cleaned_data.get("password2")
-
-        # Validate that both passwords match
-        if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match.")
-
-        return password2  # Always return the cleaned data
-
     def clean_email(self):
         email = self.cleaned_data.get('email')
         # Check if the email is already in use
@@ -56,6 +45,26 @@ class Signup_Form(forms.ModelForm):
             # If not raise an error
             raise forms.ValidationError("This email address is already in use.")
         return email
+    
+    def clean_password2(self):
+        # Retrieve both password fields
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+
+        # Validate that both passwords match
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Passwords do not match.")
+
+        # Password strength validation
+        if password1:
+            if len(password1) < 8:
+                raise forms.ValidationError("Password must be at least 8 characters long.")
+            if not any(c.isdigit() for c in password1):
+                raise forms.ValidationError("Password must contain at least one number.")
+            if not any(c.isalpha() for c in password1):
+                raise forms.ValidationError("Password must contain at least one letter.")
+
+        return password2  # Always return the cleaned data
 
 
 # ModelForm for resending the verification email

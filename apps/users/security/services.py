@@ -8,6 +8,8 @@ import time
 from django.shortcuts import redirect
 from django.contrib import messages
 
+from django import forms
+
 
 def send_verification_email(user, request):
     """
