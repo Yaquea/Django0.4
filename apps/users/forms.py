@@ -82,7 +82,7 @@ class UserUpdateForm(forms.ModelForm):
         # Specifies the model to use
         model = User
         # Specifies the model fields to use
-        fields = ['username', 'first_name', 'last_name', 'email', 'profile_image']
+        fields = ['username', 'first_name', 'last_name', 'profile_image']
 
     def clean_profile_image(self):
         image = self.cleaned_data.get('profile_image')

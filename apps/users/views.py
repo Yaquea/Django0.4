@@ -137,10 +137,8 @@ def signup(request):
             )
             return redirect('login')  # Redirect the user to the login page.
         else:
-            error = 'Invalid form. Please try again.'
             return render(request, 'signup.html', {
-                'form': Signup_Form(),
-                'error': error, 
+                'form': form,
                 'name': "sign up",
             })
 

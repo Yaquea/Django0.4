@@ -10,7 +10,10 @@ urlpatterns = [
     path('login/', views.login, name="login"),
     path('logout/', views.log_out, name="logout"),
     path('Update/User', views.update_user, name='update_user'),
+    
     path('email-verification/<str:uidb64>/<str:token>/', views.verify_email, name='verify-email'),
     path('resend-verification/', views.resend_verification_email, name='resend-verification'),
-    path('<str:user_name>/', views.user_profile, name='user_profile'),  
+
+    path('<str:user_name>/', views.user_profile, name='user_profile'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
