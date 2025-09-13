@@ -1,1 +1,1 @@
-# Django1.0
+# Django0.4
