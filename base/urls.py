@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),  # Include user-related URLs
     path('api/', include('api.urls')),
+    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]
